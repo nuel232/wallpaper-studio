@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wallpaper_studio/models/category.dart';
+import 'package:wallpaper_studio/pages/wallpaper_detail_screen.dart';
 
 class CategoryDetailScreen extends StatelessWidget {
   final Category category;

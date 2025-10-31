@@ -1,5 +1,6 @@
 // Favorites Screen
 import 'package:flutter/material.dart';
+import 'package:wallpaper_studio/models/wallpaper.dart';
 
 class FavoritesScreen extends StatelessWidget {
   final List<Wallpaper> favorites;

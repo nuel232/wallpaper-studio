@@ -1,13 +1,15 @@
-// Browse Screen
 import 'package:flutter/material.dart';
+import 'package:wallpaper_studio/models/category.dart';
+import 'package:wallpaper_studio/models/wallpaper.dart';
+import 'package:wallpaper_studio/pages/wallpaper_detail_screen.dart';
 
-class BrowseScreen extends StatelessWidget {
+class BrowserScreen extends StatelessWidget {
   final Function(String, String) onWallpaperSet;
   final List<Wallpaper> favorites;
   final Function(Wallpaper) onToggleFavorite;
   final bool Function(Wallpaper) isFavorite;
 
-  const BrowseScreen({
+  const BrowserScreen({
     Key? key,
     required this.onWallpaperSet,
     required this.favorites,

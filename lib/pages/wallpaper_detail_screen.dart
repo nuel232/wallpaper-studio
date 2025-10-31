@@ -1,5 +1,7 @@
 // Wallpaper Detail Screen
 import 'package:flutter/material.dart';
+import 'package:wallpaper_studio/models/category.dart';
+import 'package:wallpaper_studio/models/wallpaper.dart';
 
 class WallpaperDetailScreen extends StatelessWidget {
   final Wallpaper wallpaper;

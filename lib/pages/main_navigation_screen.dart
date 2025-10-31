@@ -1,8 +1,8 @@
-// Main Navigation Screen with Bottom Nav
 import 'package:flutter/material.dart';
+import 'package:wallpaper_studio/models/wallpaper.dart';
 import 'package:wallpaper_studio/pages/browser_screen.dart';
 import 'package:wallpaper_studio/pages/favorites_screen.dart';
-import 'package:wallpaper_studio/pages/home/home_screen.dart';
+import 'package:wallpaper_studio/pages/home_screen.dart';
 import 'package:wallpaper_studio/pages/settings_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -22,6 +22,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     setState(() {
       _activeWallpaper = wallpaper;
       _activeCategory = category;
+      _currentIndex = 0;
     });
   }
 
@@ -82,54 +83,74 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildNavItem(Icons.home_outlined, 'Home', 0),
-              _buildNavItem(Icons.grid_view_outlined, 'Browse', 1),
-              _buildNavItem(Icons.favorite_border, 'Favourites', 2),
-              _buildNavItem(Icons.settings_outlined, 'Settings', 3),
+              _buildNavItem(Icons.home_outlined, Icons.home, 'Home', 0),
+              _buildNavItem(
+                Icons.grid_view_outlined,
+                Icons.grid_view,
+                'Browse',
+                1,
+              ),
+              _buildNavItem(
+                Icons.favorite_border,
+                Icons.favorite,
+                'Favourites',
+                2,
+              ),
+              _buildNavItem(
+                Icons.settings_outlined,
+                Icons.settings,
+                'Settings',
+                3,
+              ),
             ],
           ),
         ),
       ),
     );
   }
-}
 
-Widget _buildNavItem(IconData icon, String label, int index) {
-  final isActive = _currentIndex == index;
-  return InkWell(
-    onTap: () => setState(() => _currentIndex = index),
-    borderRadius: BorderRadius.circular(12),
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: isActive
-            ? const Color(0xFFFBB03B).withOpacity(0.1)
-            : Colors.transparent,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: isActive ? const Color(0xFFFBB03B) : Colors.grey,
-            size: 24,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              color: isActive ? const Color(0xFFFBB03B) : Colors.grey,
-              fontSize: 12,
-              fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+  Widget _buildNavItem(
+    IconData outlineIcon,
+    IconData filledIcon,
+    String label,
+    int index,
+  ) {
+    final isActive = _currentIndex == index;
+    return InkWell(
+      onTap: () => setState(() => _currentIndex = index),
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        decoration: BoxDecoration(
+          color: isActive
+              ? const Color(0xFFFBB03B).withOpacity(0.1)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              isActive ? filledIcon : outlineIcon,
+              color: isActive ? const Color(0xFFFBB03B) : Colors.grey[600],
+              size: 24,
             ),
-          ),
-        ],
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                color: isActive ? const Color(0xFFFBB03B) : Colors.grey[600],
+                fontSize: 12,
+                fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
